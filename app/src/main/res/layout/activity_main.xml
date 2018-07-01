@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="viewModel"
+            type="co.wisne.mapme.ui.main.MainActivityViewModel"/>
+        <import type="android.view.View"/>
+
+</data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainActivity">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateBehavior="cycle"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/latitude"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLabels"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/longitude"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextLogitude"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLabels"
+            app:layout_constraintHorizontal_bias="0.617"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextLogitude" />
+
+        <EditText
+            android:id="@+id/editTextLatitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:hint="@string/latitude"
+            android:inputType="textPersonName"
+            android:text="@{String.valueOf(viewModel.latitude)}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLabels"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.407" />
+
+        <EditText
+            android:id="@+id/editTextLogitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/longitude"
+            android:inputType="textPersonName"
+            android:text="@{String.valueOf(viewModel.longitude)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLabels"
+            app:layout_constraintTop_toBottomOf="@+id/editTextLatitude" />
+
+        <android.support.constraint.Group
+            android:id="@+id/groupLocationDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.distanceVisibility ? View.VISIBLE : View.GONE }"
+            app:constraint_referenced_ids="textNextLocation,textView4,textDistance,progressBarDistance" />
+
+        <TextView
+            android:id="@+id/textNextLocation"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView4"
+            tools:text="Next Location" />
+
+        <ProgressBar
+            android:id="@+id/progressBarDistance"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:progress="2"
+            app:layout_constraintEnd_toStartOf="@+id/textNextLocation"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/distance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarDistance" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/your_position"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextLogitude" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guidelineLabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.29" />
+
+        <Button
+            android:id="@+id/buttonAddToList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="@{(view)->viewModel.addLocationToList()}"
+            android:text="@string/add"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDistance" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonNavigate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAddToList" />
+
+        <ToggleButton
+            android:id="@+id/buttonNavigate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{(view)->viewModel.navigate()}"
+            android:text="@string/start"
+            android:textOff="@string/stopped"
+            android:textOn="@string/started"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+
